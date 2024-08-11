@@ -1,9 +1,26 @@
-import React from 'react'
+import React, {useEffect, useState } from 'react'
 import Cards from "./Cards";
 import list from "../../public/list.json"
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+
 
 function Course() {
+  const[book, setBook] = useState([])
+  useEffect(() => {
+    const getBook=async()=> {
+      try{
+      const res = await axios.get("https:/localhost:4001/book");
+      console.log(res.data)
+      setBook(res.data)
+      } catch(error) {
+        console.log(error)
+
+
+      }
+    }
+    getBook();
+  }, [])
+  
   return (
     <>
     <div className="max-w-screen-2x1 container mx-auto md:px-20 px-4 " > 
